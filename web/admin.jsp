@@ -1,4 +1,5 @@
-<%@ page import="java.util.List, model.UserEntity, org.hibernate.Session, org.hibernate.SessionFactory, org.hibernate.cfg.Configuration" %>
+<%@ page import="java.util.List, model.SectionEntity, org.hibernate.Session, org.hibernate.SessionFactory, org.hibernate.cfg.Configuration" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,29 +12,24 @@
 <body>
 <div class="container mt-5">
     <h2 class="text-center">Admin Panel</h2>
+    <h4>Sections</h4>
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
+            <th>Section ID</th>
+            <th>Section Name</th>
         </tr>
         </thead>
         <tbody>
         <%
-            // Initialize Hibernate SessionFactory
             SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
             try (Session hibernateSession = sessionFactory.openSession()) {
-                // Fetch all users from the database
-                List<UserEntity> users = hibernateSession.createQuery("FROM UserEntity", UserEntity.class).list();
-                for (UserEntity user : users) {
+                List<SectionEntity> sections = hibernateSession.createQuery("FROM SectionEntity", SectionEntity.class).list();
+                for (SectionEntity section : sections) {
         %>
         <tr>
-            <td><%= user.getIdUser() %></td>
-            <td><%= user.getName() %></td>
-            <td><%= user.getEmail() %></td>
-            <td><%= user.getRole() %></td>
+            <td><%= section.getIdSection() %></td>
+            <td><%= section.getSectionName() %></td>
         </tr>
         <%
                 }
